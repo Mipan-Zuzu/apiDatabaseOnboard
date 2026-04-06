@@ -4,6 +4,10 @@ import onboard from "../model/model.js"
 import mongoose, { mongo } from "mongoose"
 
 export const On_boarding = async (req: Request, res: Response): Promise<void> => {
+    res.setHeader(
+        "Content-Security-Policy",
+        "default-src 'self'; img-src 'self' https: data:;"
+    )
     const findOnboard = await onboard.find()
     if(!findOnboard) {
         res.status(404).json({data: "data kosong", status: 404})

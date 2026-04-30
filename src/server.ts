@@ -1,7 +1,7 @@
 import express from "express"
 import mongoose, { mongo } from "mongoose"
 import { type Request, type Response, type NextFunction, Router } from "express"
-import { Aploud_onboarding, On_boarding } from "./routes/routes_server.js"
+import { Aploud_onboarding, On_boarding, secretApi, secretCrete } from "./routes/routes_server.js"
 import dotenv from "dotenv"
 
 const app = express()
@@ -27,5 +27,8 @@ databaseConnection()
 
 app.get("/api/onboarding", async (req: Request, res: Response,): Promise<void> => On_boarding(req, res))
 app.post("/api/onboarding/api", async (req: Request, res: Response): Promise<void> => Aploud_onboarding(req, res))
+app.get("/api/secret/api", async (req: Request, res: Response): Promise<void> => secretApi(req, res))
+app.post("/api/secret/api", async (req: Request, res: Response): Promise<void> => secretCrete(req, res))
+
 
 app.listen(3000, () => log("listen app on port 3000"))
